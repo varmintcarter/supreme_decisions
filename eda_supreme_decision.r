@@ -15,18 +15,9 @@ my_tibble <- enframe(text) |>
 df <- my_tibble |> 
   mutate(text = str_squish(text)) |> 
   mutate(row_len = str_length(text)) |> 
-  filter(row_len != 0) |> 
+  filter(row_len != 0)
   # n = 309
-  mutate(trump_v_united_states = str_detect(text,
-                                            regex("TRUMP v. UNITED STATES"))) |> 
-  # case name removes all rows with even page numbers
-  filter(trump_v_united_states == FALSE) |>
-  # n = 59
-  select(-trump_v_united_states) |> 
 
-
-df |> skim(row_len)
-df |> select(text, row_len) |> filter(row_len < 56) |> arrange(row_len) 
 
 ## even page pattern contains the name of the case----
 df <- my_tibble |> 
